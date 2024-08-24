@@ -14,12 +14,8 @@ namespace Products.API.ProductFeatures.GetProductByCategoryName
 
             await session.BeginTransactionAsync(cancellationToken);
 
-            var product = await session.Query<Product>().Where(p => p.Category.Contains(query.categoryName)).ToListAsync();
-
-            if (product == null)
-            {
-                throw new ProductNotFoundException();
-            }
+            var product = await session.Query<Product>().Where(p => p.Category.Contains(query.categoryName)).ToListAsync(token: cancellationToken);
+            
             var result = new GetProductByCategoryNameResult(product);
 
             return result;

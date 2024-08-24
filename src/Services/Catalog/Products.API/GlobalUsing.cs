@@ -6,3 +6,5 @@ global using CommonOperations.CQRS;
 global using Products.API.Models;
 global using Products.API.Exceptions;
 global using FluentValidation;
+global using CommonOperations.Behaviors;
+global using CommonOperations.Exceptions.Handler;

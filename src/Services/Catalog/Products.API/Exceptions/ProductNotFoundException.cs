@@ -1,8 +1,10 @@
-﻿namespace Products.API.Exceptions
+﻿using CommonOperations.Exceptions;
+
+namespace Products.API.Exceptions
 {
-    public class ProductNotFoundException : Exception
+    public class ProductNotFoundException : NotFoundException
     {
-        public ProductNotFoundException() : base("Product not found")
+        public ProductNotFoundException(Guid Id) : base("Product",Id)
         {
         }
     }
