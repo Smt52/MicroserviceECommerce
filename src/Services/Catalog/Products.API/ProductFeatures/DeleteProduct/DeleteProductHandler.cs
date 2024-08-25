@@ -13,12 +13,10 @@
 
     }
 
-    public class DeleteProductCommandHandler(IDocumentSession session, ILogger<DeleteProductCommandHandler> logger) : ICommandHandler<DeleteProductCommand, DeleteProductResponse>
+    public class DeleteProductCommandHandler(IDocumentSession session) : ICommandHandler<DeleteProductCommand, DeleteProductResponse>
     {
         public async Task<DeleteProductResponse> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Product with Id:{@Product} has been deleted.", command);
-
             await session.BeginTransactionAsync(cancellationToken);
             session.Delete<Product>(command.Id);
 

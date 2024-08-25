@@ -3,10 +3,13 @@ var builder = WebApplication.CreateBuilder(args);
 //Add Services
 
 var assembly = typeof(Program).Assembly;
+
+//Everything related to MediatR must be defined here in the config. For the entire request response pipeline
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddCarter();
