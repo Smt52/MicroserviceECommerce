@@ -8,3 +8,5 @@ global using Products.API.Exceptions;
 global using FluentValidation;
 global using CommonOperations.Behaviors;
 global using CommonOperations.Exceptions.Handler;
+global using Products.API.Data;
+global using Marten.Pagination;
