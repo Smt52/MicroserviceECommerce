@@ -3,5 +3,11 @@ version: '3.4'
 services:
   productsdb:
     image: postgres
+  products.api:
+    image: ${DOCKER_REGISTRY-}productsapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/Products.API/Dockerfile
+
 volumes:
   postgres_product:
