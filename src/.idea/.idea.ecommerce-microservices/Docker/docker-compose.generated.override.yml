@@ -1,0 +1,22 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.4"
+services:
+  products.api:
+    build:
+      context: "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src"
+      dockerfile: "Services/Catalog/Products.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Products.API.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "productsapi:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\user\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src\\Services\\\
+      Catalog\\Products.API:/app:rw"
+    - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src:/src:rw"
+    working_dir: "/app"
