@@ -12,6 +12,12 @@ public record OrderItemId
     //Factory method for OrderItemId
     public static OrderItemId Of(Guid value)
     {
+        ArgumentNullException.ThrowIfNull(value);
+        if (value == Guid.Empty)
+        {
+            throw new DomainException("OrderItemId cannot be null");
+        }
+
         return new OrderItemId(value);
     }
 }
