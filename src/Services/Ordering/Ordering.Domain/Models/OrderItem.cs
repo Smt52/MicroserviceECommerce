@@ -3,8 +3,8 @@
     public class OrderItem : Entity<OrderItemId>
     {
         internal OrderItem(
-            ProductId productId,
             OrderId orderId,
+            ProductId productId,
             decimal price,
             int quantity)
         {
