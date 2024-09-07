@@ -1,12 +1,19 @@
 version: '3.4'
 
 services:
+
   productsdb:
     image: postgres
+
   basketdb:
     image: postgres
+
   distributedcahce:
     image: redis
+
+  orderdb:
+    image: mcr.microsoft.com/mssql/server
+
   products.api:
     image: ${DOCKER_REGISTRY-}productsapi
     build:
