@@ -9,7 +9,7 @@ using Ordering.Infastructure.Data;
 
 #nullable disable
 
-namespace Ordering.Infastructure.Data.Migrations
+namespace Ordering.Infastructure.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -284,8 +284,8 @@ namespace Ordering.Infastructure.Data.Migrations
 
             modelBuilder.Entity("Ordering.Domain.Models.OrderItem", b =>
                 {
-                    b.HasOne("Ordering.Domain.Models.Order", null)
-                        .WithMany()
+                    b.HasOne("Ordering.Domain.Models.Order", "Order")
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -295,6 +295,8 @@ namespace Ordering.Infastructure.Data.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Ordering.Domain.Models.Order", b =>

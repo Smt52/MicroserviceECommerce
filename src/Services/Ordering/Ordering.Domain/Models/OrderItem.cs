@@ -18,7 +18,7 @@
         public ProductId ProductId { get; private set; } = default!;
 
         public OrderId OrderId { get; private set; } = default!;
-
+        public Order? Order { get; private set; }
         public decimal Price { get; private set; }
 
         public int Quantity { get; private set; }

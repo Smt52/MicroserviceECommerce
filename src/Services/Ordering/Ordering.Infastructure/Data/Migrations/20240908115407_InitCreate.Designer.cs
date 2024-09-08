@@ -10,10 +10,10 @@ using Ordering.Infastructure.Data;
 
 #nullable disable
 
-namespace Ordering.Infastructure.Data.Migrations
+namespace Ordering.Infastructure.data.migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240907114338_InitCreate")]
+    [Migration("20240908115407_InitCreate")]
     partial class InitCreate
     {
         /// <inheritdoc />
@@ -222,9 +222,6 @@ namespace Ordering.Infastructure.Data.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("OrderId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -243,8 +240,6 @@ namespace Ordering.Infastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("OrderId1");
 
                     b.HasIndex("ProductId");
 
@@ -292,21 +287,19 @@ namespace Ordering.Infastructure.Data.Migrations
 
             modelBuilder.Entity("Ordering.Domain.Models.OrderItem", b =>
                 {
-                    b.HasOne("Ordering.Domain.Models.Order", null)
-                        .WithMany()
+                    b.HasOne("Ordering.Domain.Models.Order", "Order")
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Ordering.Domain.Models.Order", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId1");
 
                     b.HasOne("Ordering.Domain.Models.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Ordering.Domain.Models.Order", b =>

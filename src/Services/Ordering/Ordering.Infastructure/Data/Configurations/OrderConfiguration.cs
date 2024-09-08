@@ -19,8 +19,8 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .IsRequired();
 
         builder
-            .HasMany<OrderItem>()
-            .WithOne()
+            .HasMany(o => o.OrderItems)
+            .WithOne(oi => oi.Order)
             .HasForeignKey(oi => oi.OrderId);
 
         builder
