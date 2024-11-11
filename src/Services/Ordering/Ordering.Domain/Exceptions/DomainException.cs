@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ordering.Domain.Exceptions
 {
-    internal class DomainException : Exception
+    public class DomainException : Exception
     {
         public DomainException()
         {
@@ -34,7 +34,7 @@ namespace Ordering.Domain.Exceptions
         public static DomainException FromJson(string json)
         {
             var data = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-            var exception = new DomainException(data["Message"]);
+            var exception = new DomainException(data?["Message"]);
             return exception;
         }
     }

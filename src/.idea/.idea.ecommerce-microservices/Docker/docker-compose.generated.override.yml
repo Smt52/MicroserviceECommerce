@@ -1,6 +1,25 @@
 # This is a generated file. Not intended for manual editing.
 version: "3.4"
 services:
+  discount.grpc:
+    build:
+      context: "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src"
+      dockerfile: "Services/Discount/Discount.gRPC/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Discount.gRPC.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "discountgrpc:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\user\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src\\Services\\\
+      Discount\\Discount.gRPC:/app:rw"
+    - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src:/src:rw"
+    working_dir: "/app"
   products.api:
     build:
       context: "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src"
@@ -18,5 +37,24 @@ services:
     - "C:\\Users\\user\\.nuget\\packages:/home/app/.nuget/packages"
     - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src\\Services\\\
       Catalog\\Products.API:/app:rw"
+    - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src:/src:rw"
+    working_dir: "/app"
+  shoppingcart.api:
+    build:
+      context: "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src"
+      dockerfile: "Services/ShoppingCart/ShoppingCart.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/ShoppingCart.API.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "shoppingcartapi:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\user\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src\\Services\\\
+      ShoppingCart\\ShoppingCart.API:/app:rw"
     - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src:/src:rw"
     working_dir: "/app"

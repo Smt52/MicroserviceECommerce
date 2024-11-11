@@ -11,10 +11,13 @@ namespace Ordering.Infastructure
         {
             var connectionString = configuration.GetConnectionString("Database");
             services.AddHttpContextAccessor();
-            services.AddDbContext<ApplicationDbContext>(opt =>
+            services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptors>();
+            services.AddScoped<ISaveChangesInterceptor,DispatchDomainEventsInterceptor>();
+            
+            services.AddDbContext<ApplicationDbContext>((sp,opt) =>
             {
-                var httpContextAccessor = services.BuildServiceProvider().GetRequiredService<IHttpContextAccessor>();
-                opt.AddInterceptors(new AuditableEntityInterceptors(httpContextAccessor));
+                
+                opt.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
                 opt.UseSqlServer(connectionString);
             });
 

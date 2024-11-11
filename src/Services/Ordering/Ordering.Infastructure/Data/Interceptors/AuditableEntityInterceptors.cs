@@ -6,12 +6,12 @@ namespace Ordering.Infastructure.Data.Interceptors;
 public class AuditableEntityInterceptors : SaveChangesInterceptor
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly HttpContext httpContext;
+    private readonly HttpContext _httpContext;
 
     public AuditableEntityInterceptors(IHttpContextAccessor httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
-        httpContext = _httpContextAccessor.HttpContext;
+        if (_httpContextAccessor.HttpContext != null) _httpContext = _httpContextAccessor.HttpContext;
     }
 
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
@@ -44,9 +44,9 @@ public class AuditableEntityInterceptors : SaveChangesInterceptor
 
             if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
             {
-                if (httpContext?.User?.Identity?.Name != null)
+                if (_httpContext?.User?.Identity?.Name != null)
                 {
-                    entry.Entity.UpdatedBy = httpContext.User.Identity.Name;
+                    entry.Entity.UpdatedBy = _httpContext.User.Identity.Name;
                 }
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
             }
