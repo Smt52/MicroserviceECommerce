@@ -5,3 +5,8 @@ global using Ordering.Domain.ValueObjects;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Ordering.Infastructure.Data;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc.Diagnostics;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using Microsoft.EntityFrameworkCore.Diagnostics;
+global using Ordering.Domain.Abstractions;
