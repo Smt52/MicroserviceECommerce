@@ -13,11 +13,11 @@
         //For empty the domainEvent list after all events handled
         public IDomainEvent[] ClearDomainEvents()
         {
-            IDomainEvent[] dequedEvents = _domainEvents.ToArray();
+            IDomainEvent[] dequeuedEvents = _domainEvents.ToArray();
 
             _domainEvents.Clear();
 
-            return dequedEvents;
+            return dequeuedEvents;
         }
     }
 }
