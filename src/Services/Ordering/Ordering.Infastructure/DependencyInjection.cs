@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Ordering.Application.Data;
 using Ordering.Infastructure.Data.Interceptors;
 
 namespace Ordering.Infastructure
@@ -20,7 +21,9 @@ namespace Ordering.Infastructure
                 opt.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
                 opt.UseSqlServer(connectionString);
             });
-
+            
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+            
             return services;
         }
     }

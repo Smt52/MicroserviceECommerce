@@ -1,6 +1,6 @@
 ﻿namespace Ordering.Domain.ValueObjects
 {
-    //Record used cause it is a value object not a entity
+    //Record used because it is a value object not an entity
     public record Address
     {
         public string FirstName { get; set; } = default!;
