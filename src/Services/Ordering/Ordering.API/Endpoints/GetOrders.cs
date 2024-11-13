@@ -1,6 +1,6 @@
 ﻿namespace Ordering.API.Endpoints;
 
-public record GetOrdersResponse(PaginatedResult<IEnumerable<OrderDto>> Orders);
+public record GetOrdersResponse(PaginatedResult<OrderDto> Orders);
 
 public class GetOrders :ICarterModule
 {

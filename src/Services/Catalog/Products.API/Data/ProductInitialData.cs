@@ -6,6 +6,11 @@ public class ProductInitialData : IInitialData
 {
     public async Task Populate(IDocumentStore store, CancellationToken cancellation)
     {
+        
+        await store.Advanced.Clean.CompletelyRemoveAllAsync(cancellation);
+        
+        await store.Storage.ApplyAllConfiguredChangesToDatabaseAsync();
+
         await using var session = store.LightweightSession();
 
         if (await session.Query<Product>().AnyAsync(token: cancellation)) return;
@@ -15,9 +20,10 @@ public class ProductInitialData : IInitialData
 
         await session.SaveChangesAsync(cancellation);
     }
-
+    private const string desc = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.";
     private static IEnumerable<Product> GetCreatedProducts() => new List<Product>()
     {
+        
             new Product()
                 {
                     Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
@@ -31,7 +37,7 @@ public class ProductInitialData : IInitialData
                 {
                     Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
                     Name = "Samsung 10",
-                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    Description = desc,
                     ImagePath = "product-2.png",
                     Price = 840.00M,
                     Category = ["Smart Phone"]
@@ -40,7 +46,7 @@ public class ProductInitialData : IInitialData
                 {
                     Id = new Guid("4f136e9f-ff8c-4c1f-9a33-d12f689bdab8"),
                     Name = "Huawei Plus",
-                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    Description = desc,
                     ImagePath = "product-3.png",
                     Price = 650.00M,
                     Category = ["White Appliances"]
@@ -49,7 +55,7 @@ public class ProductInitialData : IInitialData
                 {
                     Id = new Guid("6ec1297b-ec0a-4aa1-be25-6726e3b51a27"),
                     Name = "Xiaomi Mi 9",
-                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    Description = desc,
                     ImagePath = "product-4.png",
                     Price = 470.00M,
                     Category = ["White Appliances"]
@@ -58,7 +64,7 @@ public class ProductInitialData : IInitialData
                 {
                     Id = new Guid("b786103d-c621-4f5a-b498-23452610f88c"),
                     Name = "HTC U11+ Plus",
-                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    Description = desc,
                     ImagePath = "product-5.png",
                     Price = 380.00M,
                     Category = ["Smart Phone"]
@@ -67,7 +73,7 @@ public class ProductInitialData : IInitialData
                 {
                     Id = new Guid("c4bbc4a2-4555-45d8-97cc-2a99b2167bff"),
                     Name = "LG G7 ThinQ",
-                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    Description = desc,
                     ImagePath = "product-6.png",
                     Price = 240.00M,
                     Category = ["Home Kitchen"]
@@ -76,7 +82,7 @@ public class ProductInitialData : IInitialData
                 {
                     Id = new Guid("93170c85-7795-489c-8e8f-7dcf3b4f4188"),
                     Name = "Panasonic Lumix",
-                    Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
+                    Description = desc,
                     ImagePath = "product-6.png",
                     Price = 240.00M,
                     Category = ["Camera"]

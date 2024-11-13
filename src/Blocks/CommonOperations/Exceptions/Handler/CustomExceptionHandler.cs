@@ -19,9 +19,13 @@ public class CustomExceptionHandler(ILogger<CustomExceptionHandler> logger) : IE
             InvalidServerException =>
                 (exception.Message, exception.GetType().Name, StatusCodes.Status500InternalServerError),
             BadRequestException or
-                NotFoundException or
                 ValidationException =>
                     (exception.Message, exception.GetType().Name, StatusCodes.Status400BadRequest),
+            NotFoundException=>(
+                exception.Message,
+                exception.GetType().Name,
+                StatusCodes.Status404NotFound
+                ),
             _ =>
                 (exception.Message, exception.GetType().Name, StatusCodes.Status500InternalServerError)
         };
