@@ -1,7 +1,6 @@
-﻿namespace Messaging.Events;
+﻿namespace ShoppingCart.API.Dtos;
 
-//Used primitive types for serialization or deserialization between services
-public record ShoppingCartCheckoutEvent : IntegrationEvent
+public class CheckoutCartDto
 {
     public string UserName { get; set; } = default!;
     public Guid CustomerId { get; set; } = Guid.Empty!;

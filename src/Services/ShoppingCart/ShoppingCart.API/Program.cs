@@ -1,9 +1,3 @@
-using CommonOperations.Exceptions.Handler;
-using Discount.gRPC;
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Caching.Distributed;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
@@ -54,6 +48,9 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
     };
     return handler;
 });
+//For async Communication
+builder.Services.AddMessageBroker(builder.Configuration);
+
 //Cross Cutting Concerns
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
