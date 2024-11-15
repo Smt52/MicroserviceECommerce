@@ -20,6 +20,25 @@ services:
       Discount\\Discount.gRPC:/app:rw"
     - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src:/src:rw"
     working_dir: "/app"
+  ordering.api:
+    build:
+      context: "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src"
+      dockerfile: "Services/Ordering/Ordering.API/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Ordering.API.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "orderingapi:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\user\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src\\Services\\\
+      Ordering\\Ordering.API:/app:rw"
+    - "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src:/src:rw"
+    working_dir: "/app"
   products.api:
     build:
       context: "C:\\Users\\user\\source\\repos\\Smt52\\MicroserviceECommerce\\src"

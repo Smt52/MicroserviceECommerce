@@ -2,7 +2,7 @@
 
 namespace Ordering.Infastructure.Extensions;
 
-internal class InitialData
+internal static class InitialData
 {
     public static IEnumerable<Customer> Customers => new List<Customer>
     {
@@ -12,10 +12,10 @@ internal class InitialData
 
     public static IEnumerable<Product> Products => new List<Product>
     {
-        Product.Create(ProductId.Of(new Guid("7F1AE2FE-79BA-4E7F-9718-90A65BDF39CA")),"IPhone X",500),
-        Product.Create(ProductId.Of(new Guid("29051BBA-6D37-41E8-8924-4D33F21B32A4")),"Samsung 10",400),
-        Product.Create(ProductId.Of(new Guid("A34951CD-6A25-408B-80AE-41117946A86A")),"Huawei Plus",650),
-        Product.Create(ProductId.Of(new Guid("5B97ECC1-EA91-46FE-9AD5-A02E44E39967")),"Xiaomi Mi",450),
+        Product.Create(ProductId.Of(new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61")),"IPhone X",500),
+        Product.Create(ProductId.Of(new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914")),"Samsung 10",400),
+        Product.Create(ProductId.Of(new Guid("4f136e9f-ff8c-4c1f-9a33-d12f689bdab8")),"Huawei Plus",650),
+        Product.Create(ProductId.Of(new Guid("6ec1297b-ec0a-4aa1-be25-6726e3b51a27")),"Xiaomi Mi 9",450),
     };
 
     public static IEnumerable<Order> OrdersWithItems
@@ -36,8 +36,8 @@ internal class InitialData
                     billingAddress: address1,
                     payment: payment1
                 );
-            order1.Add(ProductId.Of(new Guid("7F1AE2FE-79BA-4E7F-9718-90A65BDF39CA")), 2, 500);
-            order1.Add(ProductId.Of(new Guid("A34951CD-6A25-408B-80AE-41117946A86A")), 1, 650);
+            order1.Add(ProductId.Of(new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61")), 2, 500);
+            order1.Add(ProductId.Of(new Guid("4f136e9f-ff8c-4c1f-9a33-d12f689bdab8")), 1, 650);
 
             var order2 = Order.Create
                 (
@@ -49,8 +49,8 @@ internal class InitialData
                     payment: payment2
                 );
 
-            order2.Add(ProductId.Of(new Guid("29051BBA-6D37-41E8-8924-4D33F21B32A4")), 1, 400);
-            order2.Add(ProductId.Of(new Guid("5B97ECC1-EA91-46FE-9AD5-A02E44E39967")), 3, 450);
+            order2.Add(ProductId.Of(new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914")), 1, 400);
+            order2.Add(ProductId.Of(new Guid("6ec1297b-ec0a-4aa1-be25-6726e3b51a27")), 3, 450);
 
             return new List<Order> { order1, order2 };
         }

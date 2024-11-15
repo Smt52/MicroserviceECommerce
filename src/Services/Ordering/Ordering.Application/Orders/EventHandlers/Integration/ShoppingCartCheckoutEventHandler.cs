@@ -2,28 +2,23 @@
 
 namespace Ordering.Application.Orders.EventHandlers.Integration;
 
-public class CheckoutCartEventHandler
-    (ISender sender,ILogger<CheckoutCartEventHandler> logger)
-    :IConsumer<ShoppingCartCheckoutEvent>
+public class ShoppingCartCheckoutEventHandler
+    (ISender sender, ILogger<ShoppingCartCheckoutEventHandler> logger)
+    : IConsumer<ShoppingCartCheckoutEvent>
 {
     public async Task Consume(ConsumeContext<ShoppingCartCheckoutEvent> context)
     {
-        logger.LogInformation("Integration Event Handled:{IntegrationEvent}",context.Message.GetType().Name);
+        logger.LogInformation("Integration Event Handled:{IntegrationEvent}", context.Message.GetType().Name);
 
         var command = MapToCreateOrderCommand(context.Message);
         await sender.Send(command);
-
     }
-
-
-
-
 
     private static CreateOrderCommand MapToCreateOrderCommand(ShoppingCartCheckoutEvent message)
     {
         var addressDto = new AddressDto(message.FirstName, message.LastName, message.EmailAddress, message.AddressLine,
             message.Country, message.State, message.ZipCode);
-        var paymentDto = new PaymentDto(message.CardName, message.CardNumber, message.Expiration, message.CVV,(PaymentMethod)message.PaymentMethod);
+        var paymentDto = new PaymentDto(message.CardName, message.CardNumber, message.Expiration, message.CVV, (PaymentMethod)message.PaymentMethod);
 
         var orderId = Guid.NewGuid();
 
