@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Blocks\CommonOperations\CommonOperations.csproj" />
+    <ProjectReference Include="..\..\..\Blocks\Messaging\Messaging.csproj" />
     <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
   </ItemGroup>
 

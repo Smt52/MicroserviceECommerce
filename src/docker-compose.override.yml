@@ -2,11 +2,11 @@ version: '3.4'
 
 services:
   productsdb:
-    container_name: productdb
+    container_name: productsdb
     environment:
      -  POSTGRES_USER=postgres
      -  POSTGRES_PASSWORD=postgres
-     -  POSTGRES_DB=ProductDb
+     -  POSTGRES_DB=ProductsDb
     restart: always
     ports:
         - "5432:5432"
@@ -38,13 +38,23 @@ services:
     restart: always
     ports:
         - "1433:1433"
-      
+     
+  messagebroker:
+    container_name: rabbitmq
+    hostname: ecommerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
   products.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__Database=Server=productdb; Port=5432; Database=ProductDb; User Id=postgres; Password=postgres; Include Error Detail=true
+      - ConnectionStrings__Database=Server=productsdb; Port=5432; Database=ProductsDb; User Id=postgres; Password=postgres; Include Error Detail=true
     depends_on:
       - productsdb
     ports:

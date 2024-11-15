@@ -3,7 +3,7 @@ using Messaging.Events;
 
 namespace ShoppingCart.API.Cart.CheckoutCart;
 
-public record CheckoutCartCommand(CheckoutCartDto CheckoutCartDto) 
+public record CheckoutCartCommand(CheckoutCartDto BasketCheckoutDto) 
     : ICommand<CheckoutCartResult>;
 
 public record CheckoutCartResult(bool IsSuccess);
@@ -13,8 +13,8 @@ public class CheckoutCartValidator
 {
     public CheckoutCartValidator()
     {
-        RuleFor(x => x.CheckoutCartDto).NotNull().WithMessage("Cart cannot be empty!");
-        RuleFor(x => x.CheckoutCartDto.UserName).NotEmpty().WithMessage("User must be selected!");
+        RuleFor(x => x.BasketCheckoutDto).NotNull().WithMessage("Cart cannot be empty!");
+        RuleFor(x => x.BasketCheckoutDto.UserName).NotEmpty().WithMessage("User must be selected!");
     }
 }
 
@@ -24,18 +24,18 @@ public class CheckoutCartHandler (IBasketRepository repository,IPublishEndpoint 
 {
     public async Task<CheckoutCartResult> Handle(CheckoutCartCommand command, CancellationToken cancellationToken)
     {
-        var cart = await repository.GetBasket(command.CheckoutCartDto.UserName, cancellationToken);
+        var cart = await repository.GetBasket(command.BasketCheckoutDto.UserName, cancellationToken);
         if (cart==null)
         {
             return new CheckoutCartResult(false);
         }
 
-        var eventMessage = command.CheckoutCartDto.Adapt<ShoppingCartCheckoutEvent>();
+        var eventMessage = command.BasketCheckoutDto.Adapt<ShoppingCartCheckoutEvent>();
         eventMessage.TotalPrice = cart.TotalPrice;
 
         await publishEndpoint.Publish(eventMessage, cancellationToken);
 
-        await repository.DeleteBasket(command.CheckoutCartDto.UserName, cancellationToken);
+        await repository.DeleteBasket(command.BasketCheckoutDto.UserName, cancellationToken);
 
         return new CheckoutCartResult(true);
     }
