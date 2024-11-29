@@ -14,4 +14,6 @@ app.UseRateLimiter();
 
 app.MapReverseProxy();
 
+app.UseCors("AllowLocalhost");
+
 await app.RunAsync();

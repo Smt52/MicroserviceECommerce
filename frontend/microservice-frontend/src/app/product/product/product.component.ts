@@ -15,7 +15,7 @@ export class ProductComponent {
     @Output() selectedProductId = new EventEmitter<string>();
 
     get imagePath(){
-        return `./assets/products/${this.product.imagePath}`;
+        return `${this.product.imagePath}`;
     }
 
 

@@ -1,0 +1,26 @@
+section header{
+    background-color: whitesmoke;
+    border: 1px solid #ccc;
+    box-shadow: black 0px 0px 10px;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+.product-header{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.product-header img{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+.product-view{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+}

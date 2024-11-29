@@ -1,6 +1,6 @@
 <app-card>
     <button [class.active]="selected" (click)="onSelectProduct()">
-        <img [src]="product.imagePath" [alt]="product.name"/>
+        <img [src]="product.imagePath" [alt]="product.name + ' Product '"/>
         <span>{{product.name}}</span>
     </button>
 </app-card>

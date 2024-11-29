@@ -20,10 +20,10 @@ namespace YarpApiGateway.DependencyInjection
 
             services.AddCors(opt =>
             {
-                opt.AddPolicy("AllowSpecificOrigins",
+                opt.AddPolicy("AllowLocalhost",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200/")
+                        builder.WithOrigins("http://localhost:4200")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                     });

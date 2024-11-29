@@ -1,0 +1,12 @@
+header img {
+    width: 4%;
+    height: 4%;
+    margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+    header img {
+        width:20%;
+        height: 20%;
+    }
+}

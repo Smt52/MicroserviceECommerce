@@ -26,10 +26,8 @@ export class ProductPageComponent {
     this.productService.getProducts().subscribe({
       next: (products: Product[]) => {
         this.products = products;
-        console.log(products);
         if(this.products.length > 0){
           this.selectedProductId = this.products[0].id;
-          console.log(this.selectedProductId);
         }
       },
       error: (error) => {
@@ -46,7 +44,6 @@ export class ProductPageComponent {
     this.selectedProductId = productId;
     this.productService.getProductById(productId).subscribe({
       next: (product: Product) => {
-        console.log(product);
       },
       error: (error) => {
         console.error(error);

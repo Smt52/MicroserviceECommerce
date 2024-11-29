@@ -1,19 +1,24 @@
 <main>
-    <ul id="products">
-        <li *ngFor="let product of products">
-            <app-product
-                [selected]="product.id === selectedProductId"
-                [product]="product"
-                (selectedProductId)="onSelectProduct($event)"
-            />
-        </li>
-    </ul>
+    <div class="container">
+        <div class="products-list">
+            <ul id="products">
+                <li *ngFor="let product of products">
+                    <app-product
+                        [selected]="product.id === selectedProductId"
+                        [product]="product"
+                        (selectedProductId)="onSelectProduct($event)"
+                    ></app-product>
+                </li>
+            </ul>
+        </div>
 
-    <app-product-view *ngIf="selectedProduct;else fallback" 
-    [product]="selectedProduct!"
-    />
-    <ng-template #fallback>
-        <p id="fallback">Please select a product</p>
-    </ng-template>
-
+        <div class="product-view">
+            <app-product-view *ngIf="selectedProduct; else fallback" 
+                [product]="selectedProduct!"
+            ></app-product-view>
+            <ng-template #fallback>
+                <p id="fallback">Please select a product</p>
+            </ng-template>
+        </div>
+    </div>
 </main>
