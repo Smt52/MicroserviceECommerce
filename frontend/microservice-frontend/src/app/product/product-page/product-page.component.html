@@ -1,0 +1,19 @@
+<main>
+    <ul id="products">
+        <li *ngFor="let product of products">
+            <app-product
+                [selected]="product.id === selectedProductId"
+                [product]="product"
+                (selectedProductId)="onSelectProduct($event)"
+            />
+        </li>
+    </ul>
+
+    <app-product-view *ngIf="selectedProduct;else fallback" 
+    [product]="selectedProduct!"
+    />
+    <ng-template #fallback>
+        <p id="fallback">Please select a product</p>
+    </ng-template>
+
+</main>
