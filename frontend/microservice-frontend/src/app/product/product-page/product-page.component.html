@@ -1,24 +1,41 @@
 <main>
-    <div class="container">
-        <div class="products-list">
-            <ul id="products">
-                <li *ngFor="let product of products">
-                    <app-product
-                        [selected]="product.id === selectedProductId"
-                        [product]="product"
-                        (selectedProductId)="onSelectProduct($event)"
-                    ></app-product>
-                </li>
-            </ul>
-        </div>
-
-        <div class="product-view">
-            <app-product-view *ngIf="selectedProduct; else fallback" 
-                [product]="selectedProduct!"
-            ></app-product-view>
-            <ng-template #fallback>
-                <p id="fallback">Please select a product</p>
-            </ng-template>
-        </div>
+  @if (isLoading()) {
+  <div class="products-list">
+    <p class="fallback-text">Loading Products...</p>
+    <div class="loading-spinner"></div>
+  </div>
+  }
+  <div class="container">
+    <div class="products-list">
+      <ul id="products">
+        <li *ngFor="let product of products">
+          <app-product
+            [selected]="product.id === selectedProductId"
+            [product]="product"
+            (selectedProductId)="onSelectProduct($event)"
+          ></app-product>
+        </li>
+      </ul>
     </div>
+    @if (isProductFetching()) {
+    <div class="product-view">
+      <p class="fallback-text">Fetching Product...</p>
+      <div class="loading-spinner"></div>
+    </div>
+    }
+    <div class="product-view">
+      <app-product-view
+        *ngIf="selectedProduct; else fallback"
+        [product]="selectedProduct!"
+      ></app-product-view>
+      <ng-template #fallback>
+        <p id="fallback">Please select a product</p>
+      </ng-template>
+    </div>
+    <div class="addProduct">
+      <button>
+        <a routerLink="/add-product">Add Product</a>
+      </button>
+    </div>
+  </div>
 </main>

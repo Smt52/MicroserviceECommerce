@@ -14,17 +14,27 @@ export class ProductService {
         
 
     getProducts(): Observable<Product[]> {
-        return this.httpClient.get<{ products: Product[] }>(this.apiUrl + '/products')
-          .pipe(map(response => response.products));
+        return this.httpClient.get<{ products: Product[] }>(`${this.apiUrl}/products`,{observe:'response'})
+          .pipe(map(response => response.body!.products));
       }
 
 
-    getProductById(id:string):Observable<Product>{
-        return this.httpClient.get<Product>(this.apiUrl + '/products/' + id);
-    }
+      getProductById(id: string): Observable<Product> {
+        return this.httpClient.get<{product :Product}>(`${this.apiUrl}/products/${id}`)
+        .pipe(
+            map(response=>response.product)
+        );
+      }
+      
+      
     
     getProductsByCategory(category:string):Observable<Product[]>{
         return this.httpClient.get<Product[]>(this.apiUrl + "products/category/" + category);
+    }
+
+
+    addProduct(product:Product):Observable<Product>{
+        return this.httpClient.post<Product>(this.apiUrl + '/products',product);
     }
 }
 

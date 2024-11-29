@@ -14,7 +14,7 @@ namespace YarpApiGateway.DependencyInjection
                 {
                     //Fixed policy only allows 5 Request in 10 seconds
                     options.Window = TimeSpan.FromSeconds(10);
-                    options.PermitLimit = 5;
+                    options.PermitLimit = 100;
                 });
             });
 

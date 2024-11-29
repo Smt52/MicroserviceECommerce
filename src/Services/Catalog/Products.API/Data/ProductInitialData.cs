@@ -6,24 +6,23 @@ public class ProductInitialData : IInitialData
 {
     public async Task Populate(IDocumentStore store, CancellationToken cancellation)
     {
-        
         await store.Advanced.Clean.CompletelyRemoveAllAsync(cancellation);
-        
+
         await store.Storage.ApplyAllConfiguredChangesToDatabaseAsync();
 
         await using var session = store.LightweightSession();
 
         if (await session.Query<Product>().AnyAsync(token: cancellation)) return;
 
-
         session.Store<Product>(GetCreatedProducts());
 
         await session.SaveChangesAsync(cancellation);
     }
+
     private const string desc = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.";
+
     private static IEnumerable<Product> GetCreatedProducts() => new List<Product>()
     {
-        
             new Product()
                 {
                     Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
@@ -83,7 +82,7 @@ public class ProductInitialData : IInitialData
                     Id = new Guid("93170c85-7795-489c-8e8f-7dcf3b4f4188"),
                     Name = "Panasonic Lumix",
                     Description = desc,
-                    ImagePath = "product-6.png",
+                    ImagePath = "product-7.png",
                     Price = 240.00M,
                     Category = ["Camera"]
                 }
